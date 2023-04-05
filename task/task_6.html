@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 6</title>
+</head>
+
+<body>
+   <a href="../index.html">До задач</a>
+   <p>Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я довжиною 5 символів і під яким індексом.</p>
+   <script>
+      const arrNames = ['Anrew', 'Zhenya', 'Olga', 'Nazar', 'Sergio', 'Max', 'Nastya', 'Oleg', 'Vasya', 'Petr', 'Potter',]
+
+      function bubleSort(arr) {
+         let changes
+         do {
+            changes = false
+            for (let i = 1; i < arr.length; i++) {
+               if (arr[i - 1].length > arr[i].length) {
+                  [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]
+                  changes = true
+               }
+            }
+         } while (changes);
+
+         return arr
+      }
+
+      function binarySearch(arr, nameLength) {
+         let start = 0
+         let end = arr.length - 1
+
+         while (start <= end) {
+            let pointer = Math.floor((start + end) / 2)
+            if (arr[pointer].length === nameLength) return true
+            if (arr[pointer].length > nameLength) end = pointer - 1
+            if (arr[pointer].length < nameLength) start = pointer + 1
+         }
+         return false
+      }
+      document.write(`
+         Відсортований масив імен (за зростанням довжини імен) = ${bubleSort(arrNames)} <br>
+         Результат пошуку = ${binarySearch(bubleSort(arrNames), 5)}
+         `)
+
+
+
+   </script>
+</body>
+
+</html>

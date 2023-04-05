@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 5</title>
+</head>
+
+<body>
+   <a href="../index.html">До задач</a>
+   <p>Дано масив імен. Застосовуючи відповідне сортування та бінарний пошук визначити, чи є у масиві ім’я «Olga» і під яким індексом.</p>
+   <script>
+      const arrNames = ['Anrew', 'Zhenya', 'Olga', 'Nazar', 'Sergio', 'Max', 'Nastya', 'Oleg', 'Vasya', 'Petr', 'Potter',]
+
+      function bubleSort(arr) {
+         let changes
+         do {
+            changes = false
+            for (let i = 1; i < arr.length; i++) {
+               if (arr[i] < arr[i - 1]) {
+                  let temp = arr[i - 1]
+                  arr[i - 1] = arr[i]
+                  arr[i] = temp
+                  changes = true
+               }
+            }
+         } while (changes);
+
+         return arr
+      }
+
+      function findIndexName(arr, name) {
+         let start = 0;
+         let end = arr.length - 1
+
+         while (start <= end) {
+            const pointer = Math.floor((start + end) / 2)
+            if (arr[pointer] === name) return pointer
+            if (arr[pointer] < name) start = pointer + 1
+            if (arr[pointer] > name) end = pointer - 1
+         }
+
+         return ("Ім'я відсутнє в списку")
+
+      }
+
+      document.write(`
+         Відсортований масив = ${bubleSort(arrNames)}<br>
+         Шукане ім'я знаходиться за індексом = ${findIndexName(bubleSort(arrNames), "Olga")}
+      `)
+
+   </script>
+</body>
+
+</html>

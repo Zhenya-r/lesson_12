@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 1</title>
+</head>
+
+<body>
+   <a href="../index.html">До задач</a>
+   <p>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування бульбашкою</p>
+   <script>
+      const arr = getArr(30)
+
+      function getRandomNumber(minValue, maxValue) {
+         return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+      }
+
+      function getArr(arrLength) {
+         const arr = []
+         for (let i = 0; i < arrLength; i++) {
+            const randomNumber = getRandomNumber(-500, 500)
+            arr.push(randomNumber)
+         }
+         return arr
+      }
+
+      function bubleSort(arr) {
+
+         let changesNumber = 0
+         let changes
+
+         do {
+            changes = false
+            for (let i = 1; i < arr.length; i++) {
+               if (arr[i - 1] > arr[i]) {
+                  let tmp = arr[i] // 2
+                  arr[i] = arr[i - 1]
+                  arr[i - 1] = tmp
+
+                  changes = true
+                  changesNumber++
+               }
+            }
+         } while (changes)
+
+         return changesNumber
+      }
+
+      document.write(`
+      Вхідний масив = ${arr} <br>
+      Кількість обмінів = ${bubleSort(arr)}
+      `)
+
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 4</title>
+   <style>
+      table {
+         margin-bottom: 20px;
+         border: 3px solid black;
+      }
+
+      td {
+         border: 1px solid black;
+      }
+   </style>
+</head>
+
+<body>
+
+   <a href="../index.html">До задач</a>
+   <p>Для розглянутих методів сортування спробувати вивести етапи сортування шляхом виведення відповідних таблиць за зразком. Тобто кожного разу після обміну елементів вивести поточний стан масиву на екран.</p>
+   <script>
+      const arr = getArr(5)
+      const arr1 = getArr(5)
+      const arr2 = getArr(5)
+
+      function getRandomNumber(minValue, maxValue) {
+         return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+      }
+
+      function getArr(arrLength) {
+         const arr = []
+         for (let i = 0; i < arrLength; i++) {
+            const randomNumber = getRandomNumber(-500, 500)
+            arr.push(randomNumber)
+         }
+         return arr
+      }
+
+
+      function bubleSort(arr) {
+         let changesNumber = 0
+         let changes
+         document.write('<table>')
+         do {
+            changes = false
+            for (let i = 1; i < arr.length; i++) {
+               if (arr[i - 1] > arr[i]) {
+                  let tmp = arr[i] // 2
+                  arr[i] = arr[i - 1]
+                  arr[i - 1] = tmp
+
+                  changes = true
+                  changesNumber++
+                  document.write(`
+                     <tr><td>${arr}</td></tr>
+                  `)
+               }
+            }
+         } while (changes)
+         document.write('</table>')
+         return arr
+      }
+
+      function coctailSort(arr) {
+         let changesNumber = 0
+         let leftIndex = 0
+         let rightIndex = arr.length - 1
+         document.write('<table>')
+         do {
+
+            for (let index = leftIndex; index < rightIndex; index++) {
+               if (arr[index] > arr[index + 1]) {
+                  [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]]
+                  changesNumber++
+                  document.write(`
+                     <tr><td>${arr}</td></tr>
+                  `)
+               }
+            }
+            rightIndex--
+            for (let index = rightIndex; index > leftIndex; index--) {
+               if (arr[index - 1] > arr[index]) {
+                  [arr[index - 1], arr[index]] = [arr[index], arr[index - 1]]
+                  changesNumber++
+                  document.write(`
+                     <tr><td>${arr}</td></tr>
+                  `)
+               }
+            }
+            leftIndex++
+         } while (leftIndex < rightIndex)
+
+         document.write('</table>')
+
+         return changesNumber
+      }
+
+      function insertSort(arr) {
+         let changesCounter = 0;
+         document.write('<table>')
+         for (let i = 1; i < arr.length; i++) {
+            const currentNumber = arr[i]
+            let pointer = i - 1
+            while (pointer >= 0 && arr[pointer] > currentNumber) {
+               arr[pointer + 1] = arr[pointer]
+               changesCounter++
+               pointer--
+            }
+            arr[pointer + 1] = currentNumber
+            document.write(`
+                     <tr><td>${arr}</td></tr>
+                  `)
+         }
+         document.write('</table>')
+         return changesCounter
+      }
+
+
+      bubleSort(arr1)
+      coctailSort(arr)
+      insertSort(arr2)
+
+   </script>
+</body>
+
+</html>

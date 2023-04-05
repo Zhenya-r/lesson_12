@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 3</title>
+</head>
+
+<body>
+   <a href="../index.html">До задач</a>
+   <p>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування включеннями. </p>
+
+   <script>
+      const arr = getArr(30)
+
+      function getRandomNumber(minValue, maxValue) {
+         return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+      }
+
+      function getArr(arrLength) {
+         const arr = []
+         for (let i = 0; i < arrLength; i++) {
+            const randomNumber = getRandomNumber(-500, 500)
+            arr.push(randomNumber)
+         }
+         return arr
+      }
+
+
+      function insertSort(arr) {
+         let changesCounter = 0;
+         for (let i = 1; i < arr.length; i++) {
+            const currentNumber = arr[i]
+            let pointer = i - 1
+            while (pointer >= 0 && arr[pointer] > currentNumber) {
+               arr[pointer + 1] = arr[pointer]
+               changesCounter++
+               pointer--
+            }
+            arr[pointer + 1] = currentNumber
+         }
+         return changesCounter
+      }
+
+      document.write(`
+      Вхідний масив = ${arr} <br>
+      Кількість обмінів під час сорування = ${insertSort(arr)}
+      `)
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Task 2</title>
+</head>
+
+<body>
+   <a href="../index.html">До задач</a>
+   <p>Дано масив 30 випадкових цілих чисел. Підрахувати скільки було обмінів під час сортування змішуванням. </p>
+   <script>
+      const arr = getArr(30)
+
+      function getRandomNumber(minValue, maxValue) {
+         return minValue + Math.floor(Math.random() * (maxValue - minValue + 1))
+      }
+
+      function getArr(arrLength) {
+         const arr = []
+         for (let i = 0; i < arrLength; i++) {
+            const randomNumber = getRandomNumber(-500, 500)
+            arr.push(randomNumber)
+         }
+         return arr
+      }
+
+      function coctailSort(arr) {
+         let changesNumber = 0
+         let leftIndex = 0
+         let rightIndex = arr.length - 1
+
+         do {
+
+            for (let index = leftIndex; index < rightIndex; index++) {
+               if (arr[index] > arr[index + 1]) {
+                  [arr[index], arr[index + 1]] = [arr[index + 1], arr[index]]
+                  changesNumber++
+               }
+            }
+            rightIndex--
+            for (let index = rightIndex; index > leftIndex; index--) {
+               if (arr[index - 1] > arr[index]) {
+                  [arr[index - 1], arr[index]] = [arr[index], arr[index - 1]]
+                  changesNumber++
+               }
+            }
+            leftIndex++
+         } while (leftIndex < rightIndex)
+         return changesNumber
+      }
+
+      document.write(`
+      Вхідний масив = ${arr} <br>
+      Кількість обмінів = ${coctailSort(arr)}
+      `)
+
+   </script>
+</body>
+
+</html>
